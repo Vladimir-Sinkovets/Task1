@@ -1,9 +1,4 @@
 ﻿using ImportFilesToSqlServer.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ImportFilesToSqlServer
 {
@@ -12,14 +7,7 @@ namespace ImportFilesToSqlServer
         public Action OnImportStarted;
         public Action<int, int> OnImportNextLine;
 
-        private readonly ApplicationDbContext _context;
-
-        public FileImporter(ApplicationDbContext context)
-        {
-            _context = context;
-        }
-
-        public void ImportTextFileToSql(string filePath)
+        public void ImportTextFileToSql(string filePath, ApplicationDbContext context)
         {
             OnImportStarted.Invoke();
 
@@ -41,23 +29,23 @@ namespace ImportFilesToSqlServer
                     FractionalNumber = double.Parse(elements[4]),
                 };
 
-                _context.Entries.Add(entry);
+                context.Entries.Add(entry);
 
                 if (loadedLinesCount % 1000 == 0)
-                    _context.SaveChanges();
+                    context.SaveChanges();
 
                 loadedLinesCount++;
 
                 OnImportNextLine.Invoke(allLinesCount, loadedLinesCount);
             }
         }
-        private IEnumerable<string> ReadFile(string filePath)
+        private static IEnumerable<string> ReadFile(string filePath)
         {
             StreamReader reader = new(filePath);
 
-            string? str;
+            string str;
 
-            while ((str = reader.ReadLine()) != null)
+            while (!string.IsNullOrEmpty(str = reader.ReadLine()))
             {
                 yield return str;
             }

@@ -1,15 +1,12 @@
-﻿using ImportFilesToSqlServer.Models;
-
-namespace ImportFilesToSqlServer
+﻿namespace ImportFilesToSqlServer
 {
     internal class Program
     {
-        private const string filePath = "C:\\Users\\vsink\\OneDrive\\Рабочий стол\\files\\file_0.txt";
+        private static readonly string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "file.txt");
 
         static void Main(string[] args)
         {
-            var context = new ApplicationDbContext();
-            var importer = new FileImporter(context);
+            var importer = new FileImporter();
 
             int left1 = 0;
             int top1 = 0;
@@ -24,7 +21,7 @@ namespace ImportFilesToSqlServer
 
                 Console.WriteLine();
 
-                Console.Write("left to load : ");
+                Console.Write("left : ");
                 left2 = Console.CursorLeft;
                 top2 = Console.CursorTop;
             };
@@ -38,7 +35,11 @@ namespace ImportFilesToSqlServer
                 Console.Write($"{allLinesCount - loadedLinesCount}    ");
             };
 
-            importer.ImportTextFileToSql(filePath);
+            var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Files\\");
+
+            var context = new ApplicationDbContext();
+
+            importer.ImportTextFileToSql(filePath, context);
         }
     }
 }
