@@ -5,7 +5,7 @@ namespace ImportFilesToSqlServer
 {
     internal class ApplicationDbContext : DbContext
     {
-        public DbSet<Entry> Entries { get; set; }
+        public DbSet<Entry>? Entries { get; set; }
 
         public ApplicationDbContext()
         {

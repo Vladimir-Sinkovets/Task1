@@ -14,7 +14,7 @@
             int left2 = 0;
             int top2 = 0;
 
-            importer.OnImportStarted = () => {
+            importer.OnImportStarted += () => {
                 Console.Write("done : ");
                 left1 = Console.CursorLeft;
                 top1 = Console.CursorTop;
@@ -26,7 +26,7 @@
                 top2 = Console.CursorTop;
             };
 
-            importer.OnImportNextLine = (allLinesCount, loadedLinesCount) =>
+            importer.OnImportNextLine += (allLinesCount, loadedLinesCount) =>
             {
                 Console.SetCursorPosition(left1, top1);
                 Console.Write(loadedLinesCount);

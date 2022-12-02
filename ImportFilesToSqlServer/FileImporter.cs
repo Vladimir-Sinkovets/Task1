@@ -4,12 +4,12 @@ namespace ImportFilesToSqlServer
 {
     internal class FileImporter
     {
-        public Action OnImportStarted;
-        public Action<int, int> OnImportNextLine;
+        public event Action? OnImportStarted;
+        public event Action<int, int>? OnImportNextLine;
 
         public void ImportTextFileToSql(string filePath, ApplicationDbContext context)
         {
-            OnImportStarted.Invoke();
+            OnImportStarted?.Invoke();
 
             IEnumerable<string> lines = ReadFile(filePath);
 
@@ -29,21 +29,21 @@ namespace ImportFilesToSqlServer
                     FractionalNumber = double.Parse(elements[4]),
                 };
 
-                context.Entries.Add(entry);
+                context.Entries?.Add(entry);
 
                 if (loadedLinesCount % 1000 == 0)
                     context.SaveChanges();
 
                 loadedLinesCount++;
 
-                OnImportNextLine.Invoke(allLinesCount, loadedLinesCount);
+                OnImportNextLine?.Invoke(allLinesCount, loadedLinesCount);
             }
         }
         private static IEnumerable<string> ReadFile(string filePath)
         {
             StreamReader reader = new(filePath);
 
-            string str;
+            string? str;
 
             while (!string.IsNullOrEmpty(str = reader.ReadLine()))
             {
