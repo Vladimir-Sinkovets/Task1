@@ -15,13 +15,13 @@ namespace CreateFiles
             for (int i = 0; i < count; i++)
             {
                 StringBuilder stringBuilder = new();
-
-                using StreamWriter writer = new(Path.Combine(targetFolderPath, $"file_{i}.txt"));
                 
                 for (int j = 0; j < 100000; j++)
                 {
                     AddRandomLine(stringBuilder);
                 }
+
+                using StreamWriter writer = new(Path.Combine(targetFolderPath, $"file_{i}.txt"));
 
                 writer.Write(stringBuilder);
             }

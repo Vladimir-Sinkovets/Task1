@@ -5,7 +5,7 @@ namespace ImportFilesToSqlServer
     internal class FileImporter
     {
         public event Action? OnImportStarted;
-        public event Action<int, int>? OnImportNextLine;
+        public event Action<int, int>? OnImportUpdated;
 
         public void ImportTextFileToSql(string filePath, ApplicationDbContext context)
         {
@@ -31,12 +31,13 @@ namespace ImportFilesToSqlServer
 
                 context.Entries?.Add(entry);
 
-                if (loadedLinesCount % 1000 == 0)
-                    context.SaveChanges();
-
                 loadedLinesCount++;
 
-                OnImportNextLine?.Invoke(allLinesCount, loadedLinesCount);
+                if (loadedLinesCount % 1000 == 0)
+                {
+                    context.SaveChanges();
+                    OnImportUpdated?.Invoke(allLinesCount, loadedLinesCount);
+                }
             }
         }
         private static IEnumerable<string> ReadFile(string filePath)

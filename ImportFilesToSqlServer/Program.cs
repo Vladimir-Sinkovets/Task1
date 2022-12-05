@@ -26,7 +26,7 @@
                 top2 = Console.CursorTop;
             };
 
-            importer.OnImportNextLine += (allLinesCount, loadedLinesCount) =>
+            importer.OnImportUpdated += (allLinesCount, loadedLinesCount) =>
             {
                 Console.SetCursorPosition(left1, top1);
                 Console.Write(loadedLinesCount);
