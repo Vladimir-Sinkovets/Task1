@@ -5,9 +5,11 @@ VisualStudioVersion = 17.4.33103.184
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MergingFiles", "MergingFiles\MergingFiles.csproj", "{4C6AE992-BC2B-4E8A-8F82-C32D7D34F127}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImportFilesToSqlServer", "ImportFilesToSqlServer\ImportFilesToSqlServer.csproj", "{36D30E99-4813-4BCC-86C7-BCC299363F01}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImportFilesToSqlServer", "ImportFilesToSqlServer\ImportFilesToSqlServer.csproj", "{36D30E99-4813-4BCC-86C7-BCC299363F01}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreateFiles", "CreateFiles\CreateFiles.csproj", "{DCA61397-1E89-42EB-956A-A7665E545510}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CreateFiles", "CreateFiles\CreateFiles.csproj", "{DCA61397-1E89-42EB-956A-A7665E545510}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SQL", "SQL", "{417EE74D-7799-49C2-9EE0-D53EC6945ECB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
